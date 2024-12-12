@@ -15,8 +15,8 @@ from utils import read_split_data, train_one_epoch, evaluate
 
 
 def main(args):
-    #device = torch.device(args.device if torch.cuda.is_available() else "cpu")
-    device = torch.device("mps")
+    device = torch.device(args.device if torch.cuda.is_available() else "cpu")
+
     if os.path.exists("./weights") is False:
         os.makedirs("./weights")
 
@@ -124,16 +124,16 @@ if __name__ == '__main__':
     # 数据集所在根目录
     # https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz
     parser.add_argument('--data-path', type=str,
-                        default="/Users/wenxuanzhang/Desktop/deep-learning-for-image-processing-master 2/pytorch_classification/flower_photos")
+                        default="/data/flower_photos")
     parser.add_argument('--model-name', default='', help='create model name')
 
     # 预训练权重路径，如果不想载入就设置为空字符
-    parser.add_argument('--weights', type=str, default='/Users/wenxuanzhang/Desktop/deep-learning-for-image-processing-master 2/pytorch_classification/jx_vit_base_patch16_224_in21k-e5005f0a.pth',
+    parser.add_argument('--weights', type=str, default='./vit_base_patch16_224_in21k.pth',
                         help='initial weights path')
     # 是否冻结权重
     parser.add_argument('--freeze-layers', type=bool, default=True)
-    #parser.add_argument('--device', default='cuda:0', help='device id (i.e. 0 or 0,1 or cpu)')
-    parser.add_argument('--device', default='mps', help='device id (i.e. 0 or 0,1 or cpu)')  
+    parser.add_argument('--device', default='cuda:0', help='device id (i.e. 0 or 0,1 or cpu)')
+
     opt = parser.parse_args()
 
     main(opt)
